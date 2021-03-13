@@ -437,15 +437,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void OpenPlatePage(){
         if(analyzeSelected == null) return;
-        if (analyzeSelected.getShowSearch()){
-            searchText.setVisibility(View.VISIBLE);
-        }else{
-            searchText.setVisibility(View.GONE);
-            FrameLayout.LayoutParams layoutParams
-                    =new FrameLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-            layoutParams.topMargin = 0;
-            videoListView.setLayoutParams(layoutParams);
-        }
+        searchText.setVisibility(analyzeSelected.getShowSearch() ? View.VISIBLE : View.GONE);
         netVideoList.clear();
         showLoading(true);
         new Thread(() -> {

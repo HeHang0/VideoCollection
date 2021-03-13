@@ -45,12 +45,6 @@
                 android:layout_height="match_parent" />
         </LinearLayout>
 
-        <!--<pl.droidsonroids.gif.GifImageView-->
-            <!--android:id="@+id/loading_youku"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:background="#E0FFFFFF"-->
-            <!--android:src="@drawable/loading"/>-->
         <ProgressBar
             android:id="@+id/video_loading"
             android:layout_width="match_parent"
@@ -60,18 +54,6 @@
             android:indeterminateOnly="true"
             android:padding="150dp" />
     </FrameLayout>
-
-    <!--<ImageView-->
-    <!--android:id="@+id/clear_text_youku"-->
-    <!--android:layout_width="30dp"-->
-    <!--android:layout_height="35dp"-->
-    <!--android:layout_marginTop="45dp"-->
-    <!--android:contentDescription="@string/clearinput"-->
-    <!--android:theme="@style/Base.TextAppearance.AppCompat.Widget.Button.Colored"-->
-    <!--app:layout_constraintBottom_toTopOf="@+id/search_text_youku"-->
-    <!--app:layout_constraintEnd_toEndOf="@+id/search_text_youku"-->
-    <!--app:layout_constraintTop_toTopOf="parent"-->
-    <!--app:srcCompat="@drawable/ic_text_clear" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

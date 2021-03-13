@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.oohoo.videocollection.VideoPlayActivity">
+
+    <io.vov.vitamio.widget.VideoView
+        android:id="@+id/video_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center" />
+    <LinearLayout
+        android:id="@+id/loading_LinearLayout"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:visibility="gone" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/loading_image"
+            android:background="@drawable/ic_launcher_v_player"
+            />
+
+        <TextView
+            android:id="@+id/loading_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:selectAllOnFocus="false"
+            android:shadowColor="@android:color/holo_blue_bright"
+            android:text="很卖萌的加载中~~~"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/background_light" />
+    </LinearLayout>
+    <!--<SurfaceView-->
+        <!--android:id="@+id/video_surface"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center" >-->
+    <!--</SurfaceView>-->
+    <!--<pl.droidsonroids.gif.GifImageView-->
+        <!--android:id="@+id/loading_play"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="fill_parent"-->
+        <!--android:background="#E0FFFFFF"-->
+        <!--android:src="@drawable/loading" />-->
+    <!--<Button-->
+        <!--android:id="@+id/pause"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="PAUSE"/>-->
+
+    <!--<WebView-->
+        <!--android:id="@+id/webView"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="fill_parent"-->
+        <!--android:visibility="invisible">-->
+    <!--</WebView>-->
+</RelativeLayout>

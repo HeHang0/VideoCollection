@@ -9,6 +9,8 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -910,10 +912,10 @@ public class VideoPlayerIJK extends FrameLayout implements MediaController.Media
 
     @Override
     public int getCurrentPosition() {
-        if (isInPlaybackState()) {
+        if (isInPlaybackState() || mMediaPlayer != null) {
             return (int) mMediaPlayer.getCurrentPosition();
         }
-        return 0;
+        return -1;
     }
 
     @Override

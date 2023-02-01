@@ -3,6 +3,7 @@ package com.oohoo.videocollection;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,6 +14,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
 import com.oohoo.widgets.OnPlayerBackListener;
@@ -31,6 +34,7 @@ public class IJKVideoPlayActivity extends Activity {
     private Context mContext;
     private View rootView;
     private String title;
+    private int lastPosition;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +49,7 @@ public class IJKVideoPlayActivity extends Activity {
         rootView = getLayoutInflater().from(this).inflate(R.layout.ijkplayer_layout, null);
         setContentView(rootView);
         this.mContext = this;
-
+        //这里可以简单播放器点击返回键
         player = new PlayerView(this, rootView)
                 .setIsLive(isLive)
                 .setTitle(title)
@@ -55,25 +59,18 @@ public class IJKVideoPlayActivity extends Activity {
                 .hideCenterPlayer(true)
                 .setShowSpeed(true)
                 .hideRotation(true)
-                .showThumbnail(new OnShowThumbnailListener() {
-                    @Override
-                    public void onShowThumbnail(ImageView ivThumbnail) {
-                        Glide.with(mContext)
-                                .load(R.drawable.ijkplayer_background)
-                                //.placeholder(R.color.cl_default)
-                                //.error(R.color.cl_error)
-                                .into(ivThumbnail);
-                    }
-                })
+                .showThumbnail(ivThumbnail -> Glide.with(mContext)
+                        .load(R.drawable.ijkplayer_background)
+                        //.placeholder(R.color.cl_default)
+                        //.error(R.color.cl_error)
+                        .into(ivThumbnail))
                 .setPlaySource(pathList)
-                .setPlayerBackListener(new OnPlayerBackListener() {
-                    @Override
-                    public void onPlayerBack() {
-                        //这里可以简单播放器点击返回键
-                        finish();
-                    }
-                })
-                .startPlay();
+                .setPlayerBackListener(this::playerBack).startPlay();
+        if(savedInstanceState == null) return;
+        int currentPosition = savedInstanceState.getInt("currentPosition");
+        if(currentPosition > 0) {
+            player.seekTo(currentPosition);
+        }
     }
     @Override
     protected void onPause() {
@@ -112,11 +109,19 @@ public class IJKVideoPlayActivity extends Activity {
 //        if (player != null && player.onBackPressed()) {
 //            return;
 //        }
-        exit();
+        playerBack();
 //        super.onBackPressed();
     }
 
-    private static boolean isExit = false;    @SuppressLint("HandlerLeak")
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        lastPosition = player.getCurrentPosition();
+        outState.putInt("currentPosition", lastPosition);
+        super.onSaveInstanceState(outState);
+    }
+
+    private static boolean isExit = false;
+    @SuppressLint("HandlerLeak")
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -135,6 +140,14 @@ public class IJKVideoPlayActivity extends Activity {
             super.onBackPressed();
 //            onDestroy();
 //            finish();
+        }
+    }
+
+    public void playerBack() {
+        if(player.getScreenOrientation() == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+            player.toggleFullScreen();
+        }else {
+            exit();
         }
     }
 }

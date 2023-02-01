@@ -800,8 +800,8 @@ public class PlayerView {
      */
     public PlayerView onPause() {
         bgState = (videoView.isPlaying() ? 0 : 1);
-        getCurrentPosition();
         if (!backPlayController.isChecked()){
+            getCurrentPosition();
             videoView.onPause();
         }
         return this;
@@ -1118,6 +1118,7 @@ de
      * 设置播放位置
      */
     public PlayerView seekTo(int playtime) {
+        currentPosition = playtime;
         videoView.seekTo(playtime);
         return this;
     }
@@ -1126,7 +1127,10 @@ de
      * 获取当前播放位置
      */
     public int getCurrentPosition() {
-        currentPosition = isLive ? -1 : videoView.getCurrentPosition();
+        int cp = isLive ? -1 : videoView.getCurrentPosition();
+        if(cp != -1){
+            currentPosition = cp;
+        }
         return currentPosition;
     }
 

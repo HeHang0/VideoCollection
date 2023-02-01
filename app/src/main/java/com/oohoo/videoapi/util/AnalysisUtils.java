@@ -150,6 +150,7 @@ public class AnalysisUtils {
                 String inputLine;
                 while((inputLine = bufferReader.readLine()) != null){
                     resultData.append(inputLine);
+                    resultData.append("\n");
                 }
                 is.close();
             }
@@ -178,6 +179,7 @@ public class AnalysisUtils {
                 String inputLine;
                 while((inputLine = bufferReader.readLine()) != null){
                     resultData.append(inputLine);
+                    resultData.append("\n");
                 }
             }
         } catch (IOException e) {
@@ -202,7 +204,7 @@ public class AnalysisUtils {
             }
 
             FileOutputStream outputStream = new FileOutputStream(mFile);     //构建输出流
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);  //compress到输出outputStream
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);  //compress到输出outputStream
             return true;
 
         } catch (FileNotFoundException e) {
@@ -238,6 +240,7 @@ public class AnalysisUtils {
             URL url = new URL(imagePath);
 //            InputStream is = url.openStream();
             BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inPreferredConfig =  Bitmap.Config.ARGB_8888;
             options.inJustDecodeBounds = true;
             bitmap = BitmapFactory.decodeStream(url.openStream(), null, options);
             // 获取这个图片的宽和高，注意此处的bitmap为null

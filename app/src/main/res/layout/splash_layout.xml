@@ -2,10 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+<!--    android:background="@color/light_pink"-->
     <LinearLayout
         android:id="@+id/welcome_layout"
         android:orientation="vertical"
-        android:background="@color/light_pink"
+        android:background="@drawable/side_status_bar"
         android:alpha="0"
         android:layout_height="match_parent"
         android:layout_width="match_parent">

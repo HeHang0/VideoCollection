@@ -1,0 +1,584 @@
+[
+  {
+    "name": "安徽卫视",
+    "text": "Anhui TV",
+    "src": "https://i.imgur.com/gDn101f.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "BRTVArtsChannel.cn",
+    "text": "BRTV Arts Channel",
+    "src": "https://i.imgur.com/5nimp0q.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "BRTVFilmTelevisionChannel.cn",
+    "text": "BRTV Film & Television Channel",
+    "src": "https://i.imgur.com/S6XVVbH.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "BRTVFinancialChannel.cn",
+    "text": "BRTV Financial Channel",
+    "src": "https://i.imgur.com/Ry0JHYW.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "BRTVKakuChildrensChannel.cn",
+    "text": "BRTV Kaku Childrens Channel",
+    "src": "https://i.imgur.com/t8X4wPZ.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "BRTVLifeChannel.cn",
+    "text": "BRTV Life Channel",
+    "src": "https://i.imgur.com/XXRnISd.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "BRTVNewsChannel.cn",
+    "text": "BRTV News Channel",
+    "src": "https://i.imgur.com/ms83JD6.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "BRTVScienceEducationChannel.cn",
+    "text": "BRTV Science & Education Channel",
+    "src": "https://i.imgur.com/q0qvOUe.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "BRTVWinterOlympicsDocumentaryChannel.cn",
+    "text": "BRTV Winter Olympics Documentary Channel",
+    "src": "https://i.imgur.com/X1CQGpD.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "北京卫视",
+    "text": "Beijing Satellite TV",
+    "src": "https://i.imgur.com/vsktAez.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CCTV-1综合",
+    "text": "CCTV-1",
+    "src": "https://i.imgur.com/ChfbGqR.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CCTV-10科教",
+    "text": "CCTV-10",
+    "src": "https://i.imgur.com/PKtBUL2.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CCTV-11戏曲",
+    "text": "CCTV-11",
+    "src": "https://i.imgur.com/YYcuZjn.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CCTV-12社会与法制",
+    "text": "CCTV-12",
+    "src": "https://i.imgur.com/8COTDdm.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CCTV-13新闻",
+    "text": "CCTV-13",
+    "src": "https://i.imgur.com/GGHckoY.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CCTV14少儿",
+    "text": "CCTV-14",
+    "src": "https://i.imgur.com/Mct3fYK.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CCTV-15音乐",
+    "text": "CCTV-15",
+    "src": "https://i.imgur.com/m2R60TJ.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CCTV-2财经",
+    "text": "CCTV-2",
+    "src": "https://i.imgur.com/WODuqGT.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CCTV-3综艺",
+    "text": "CCTV-3",
+    "src": "https://i.imgur.com/tYtUmUR.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CCTV-4 America",
+    "text": "CCTV-4 America",
+    "src": "https://i.imgur.com/gBbLyqh.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CCTV-4 Europe",
+    "text": "CCTV-4 Europe",
+    "src": "https://i.imgur.com/HGLFdfk.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CCTV-4 Asia",
+    "text": "CCTV-4 Asia",
+    "src": "http://www.16899168.com/dianshitai/zbbimg/cctv4.jpg",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CCTV-4",
+    "text": "CCTV-4 Asia",
+    "src": "http://www.16899168.com/dianshitai/zbbimg/cctv4.jpg",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CCTV-5体育",
+    "text": "CCTV-5",
+    "src": "https://i.imgur.com/EqURkoF.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CCTV-5+体育赛事",
+    "text": "CCTV-5+",
+    "src": "https://i.imgur.com/uW1b1KO.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CCTV-6电影",
+    "text": "CCTV-6",
+    "src": "https://i.imgur.com/dDqvRHX.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CCTV-7国防军事",
+    "text": "CCTV-7",
+    "src": "https://i.imgur.com/g7nb3L0.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CCTV-8电视剧",
+    "text": "CCTV-8",
+    "src": "https://i.imgur.com/WG8ENnR.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CCTV-9纪录",
+    "text": "CCTV-9",
+    "src": "https://i.imgur.com/3R1dkIK.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CCTV-17农业农村",
+    "text": "CCTV-17",
+    "src": "https://p1.img.cctvpic.com/photoAlbum/templet/common/DEPA1546583592748817/cctv17.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CCTV台球",
+    "text": "CCTV-Billiards",
+    "src": "https://i.imgur.com/cpD9AXZ.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CCTV中视购物",
+    "text": "CCTV-China Television Shopping Channel",
+    "src": "https://i.imgur.com/ToJBJg4.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CCTV文化精品",
+    "text": "CCTV-Culture of Quality",
+    "src": "https://i.imgur.com/Paig8gG.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CCTV娱乐",
+    "text": "CCTV-Entertainment",
+    "src": "https://i.imgur.com/6JZWAoY.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CCTV高尔夫网球",
+    "text": "CCTV-Golf & Tennis",
+    "src": "https://i.imgur.com/pXzlFZm.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CCTV健康",
+    "text": "CCTV-Health",
+    "src": "https://i.imgur.com/cdL6oGn.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CCTV怀旧剧场",
+    "text": "CCTV-Nostalgia Theater",
+    "src": "https://i.imgur.com/0YAL0RM.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CCTV风云足球",
+    "text": "CCTV-Storm Football",
+    "src": "https://i.imgur.com/BSsvdib.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CCTV风云音乐",
+    "text": "CCTV-Storm Music",
+    "src": "https://i.imgur.com/2pLRFJG.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CCTV风云剧场",
+    "text": "CCTV-Storm Theater",
+    "src": "https://i.imgur.com/uEOu5I0.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CCTV电视指南",
+    "text": "CCTV-TV Guide",
+    "src": "https://i.imgur.com/ZymwwfB.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CCTV第一剧场",
+    "text": "CCTV-The First Theater",
+    "src": "https://i.imgur.com/t0vGQmr.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CCTV女性时尚",
+    "text": "CCTV-Women's Fashion",
+    "src": "https://i.imgur.com/GXssRTm.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CCTV世界地理",
+    "text": "CCTV-World Geography",
+    "src": "https://i.imgur.com/PwgImsJ.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CDTV1.cn",
+    "text": "CDTV 1",
+    "src": "https://i.imgur.com/B4RzrDk.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CDTV2.cn",
+    "text": "CDTV 2",
+    "src": "https://i.imgur.com/VybrHW5.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CETV1",
+    "text": "CETV-1",
+    "src": "https://i.imgur.com/6sOHLq8.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CETV2",
+    "text": "CETV-2",
+    "src": "https://i.imgur.com/ZD8XPmw.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CETV3.cn",
+    "text": "CETV-3",
+    "src": "https://i.imgur.com/nkXzRJ6.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "Xing Kong International",
+    "text": "Xing Kong International",
+    "src": "http://img2.allchina.cn/FCK/userupfile/images/1(49).jpg",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CETVEarlyEducation.cn",
+    "text": "CETV-Early Education",
+    "src": "https://i.imgur.com/Ey2MrAj.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CNDFilmOldStories.cn",
+    "text": "CNDFilm-Old Stories",
+    "src": "https://i.imgur.com/ELAnqZm.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CNDFilmShincoAnimation.cn",
+    "text": "CNDFilm-Shinco Animation",
+    "src": "https://i.imgur.com/eAHXEFU.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CQTVAutomobiles.cn",
+    "text": "CQTV Automobiles",
+    "src": "https://www.lyngsat.com/logo/tv/cc/cqtv-automobiles-cn.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "中国天气",
+    "text": "China Weather TV",
+    "src": "https://i.imgur.com/YPYVoyX.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "重庆卫视",
+    "text": "Chongqing TV",
+    "src": "https://i.imgur.com/PkNWDmn.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "东方卫视",
+    "text": "Dragon TV",
+    "src": "https://i.imgur.com/WqM6xnF.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "Dragon TV International",
+    "text": "Dragon TV",
+    "src": "https://i.imgur.com/WqM6xnF.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "东南卫视",
+    "text": "Fujian South East TV",
+    "src": "https://i.imgur.com/SiZgYIi.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "GTV.cn",
+    "text": "GTV",
+    "src": "https://i.imgur.com/iyQBBgw.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "甘肃卫视",
+    "text": "Gansu TV",
+    "src": "https://i.imgur.com/dANSiug.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "广东卫视",
+    "text": "Guangdong Satellite TV",
+    "src": "https://parco-zh.github.io/demo/guangdong.jpg",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "广西卫视",
+    "text": "Guangxi TV",
+    "src": "https://i.imgur.com/dpre5Qs.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "贵州卫视",
+    "text": "Guizhou TV",
+    "src": "https://i.imgur.com/nkcKCdr.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "海南卫视",
+    "text": "Hainan Satellite TV",
+    "src": "https://i.imgur.com/j6kY8nh.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "河北卫视",
+    "text": "Hebei TV",
+    "src": "https://i.imgur.com/Z5Ppzbi.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "黑龙江",
+    "text": "Heilongjiang TV",
+    "src": "https://i.imgur.com/9fj1uba.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "河南卫视",
+    "text": "Henan TV Satellite",
+    "src": "https://i.imgur.com/IBW26kV.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "湖北卫视",
+    "text": "Hubei Satellite TV",
+    "src": "https://i.imgur.com/CTRa9BJ.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "湖南卫视",
+    "text": "Hunan TV",
+    "src": "https://parco-zh.github.io/demo/HNWS.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "江苏卫视",
+    "text": "Jiangsu Satellite TV",
+    "src": "https://i.imgur.com/CA4F1rv.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "江西卫视",
+    "text": "Jiangxi TV",
+    "src": "https://i.imgur.com/RrLthH3.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "吉林卫视",
+    "text": "Jilin TV Station",
+    "src": "https://i.imgur.com/CikxiyB.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "辽宁卫视",
+    "text": "Liaoning TV",
+    "src": "https://i.imgur.com/XRfeNTd.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "NBTV1.cn",
+    "text": "NBTV 1",
+    "src": "https://i.imgur.com/9P2iTld.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "NBTV2.cn",
+    "text": "NBTV 2",
+    "src": "https://i.imgur.com/fpOlkDs.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "NBTV3.cn",
+    "text": "NBTV 3",
+    "src": "https://i.imgur.com/MKB2aaM.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "NBTV4.cn",
+    "text": "NBTV 4",
+    "src": "https://i.imgur.com/BPy1jif.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "NBTV5.cn",
+    "text": "NBTV 5",
+    "src": "https://i.imgur.com/RStBo1O.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "内蒙古卫视",
+    "text": "Nei Monggol Chinese TV",
+    "src": "https://i.imgur.com/R4DWvBa.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "宁夏卫视",
+    "text": "Ningxia Satellite Channel",
+    "src": "https://i.imgur.com/nUQE4Ib.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "青海卫视",
+    "text": "Qinghai TV",
+    "src": "https://i.imgur.com/Nyuxo8S.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "山东教育",
+    "text": "Shandong Education TV",
+    "src": "https://i.imgur.com/yb10kF0.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "山东卫视",
+    "text": "Shandong TV",
+    "src": "https://i.imgur.com/t3ICc4i.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "山西卫视",
+    "text": "Shanxi TV",
+    "src": "https://i.imgur.com/UfKJBWW.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "陕西卫视",
+    "text": "Shannxi TV",
+    "src": "http://res.cnwest.com/t/site/10001/663789250d35fb30006597dcddc4be8b/assets/sxtvs2019/sxtvs_index/images/shan.jpg",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "深圳卫视",
+    "text": "Shenzhen TV",
+    "src": "https://i.imgur.com/AnZjWm4.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "四川卫视",
+    "text": "Sichuan TV 1",
+    "src": "https://i.imgur.com/Crapy6M.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "SuperChannel.cn",
+    "text": "Super Channel",
+    "src": "https://i.imgur.com/oLgm0xI.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "天津卫视",
+    "text": "Tianjin TV",
+    "src": "https://i.imgur.com/Bg24eaH.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "天元围棋",
+    "text": "Tianyuan I-Go Channel",
+    "src": "https://i.imgur.com/zCBOnxL.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "XiamenStarTVChina.cn",
+    "text": "Xiamen Star TV China",
+    "src": "https://i.imgur.com/vDwOXvz.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "西藏卫视",
+    "text": "Xizang TV Chinese",
+    "src": "https://i.imgur.com/V0v3ST5.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "西藏新闻综合",
+    "text": "Xizang TV Tibetan",
+    "src": "https://i.imgur.com/NtvfnVV.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "延边卫视",
+    "text": "Yanbian TV 1",
+    "src": "https://i.imgur.com/gBUlAfX.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "云南卫视",
+    "text": "Yunnan TV 1",
+    "src": "https://i.imgur.com/POV1PUV.png",
+    "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "浙江卫视",
+    "text": "Zhejiang Satellite TV",
+    "src": "https://i.imgur.com/5gQn4uY.png",
+    "url": "https://tv.cctv.com"
+  }
+]

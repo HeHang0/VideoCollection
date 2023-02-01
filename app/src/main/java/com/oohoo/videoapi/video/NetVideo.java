@@ -6,7 +6,7 @@ import android.graphics.Bitmap;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NetVideo {
+public class NetVideo implements Comparable<NetVideo> {
     private final String title;
     private final String info;
     private Bitmap img;
@@ -73,5 +73,10 @@ public class NetVideo {
     public void setExtraUrl(String url) { extraUrl = url; }
 
     public String getExtraUrl() { return extraUrl; }
+
+    @Override
+    public int compareTo(NetVideo nv) {
+        return this.getTitle().compareTo(nv.getTitle());
+    }
 }
 

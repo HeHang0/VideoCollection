@@ -29,7 +29,7 @@ public class DouBanTop250Analyze extends BaseAnalyze {
                 "https://sina.com-h-sina.com/20180807/6205_5be6212a/index.m3u8","2"));
 
         list.add(new NetVideo("《肖申克的救赎》","",
-                "https://img2.doubanio.com/view/photo/s_ratio_poster/public/p480747492.webp",
+                "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=444496867,3064755494&fm=26&gp=0.jpg",
                 "https://www.mmicloud.com:65/20190323/EUzt1oou/index.m3u8","1"));
         list.add(new NetVideo("《霸王别姬》","",
                 "https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2561716440.webp",

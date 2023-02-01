@@ -45,6 +45,8 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.google.android.material.navigation.NavigationView;
 import com.oohoo.videoapi.analysis.BaseAnalyze;
 import com.oohoo.videoapi.analysis.BilibiliAnalyze;
@@ -52,6 +54,7 @@ import com.oohoo.videoapi.analysis.CloudMusicAnalyze;
 import com.oohoo.videoapi.analysis.DouBanTop250Analyze;
 import com.oohoo.videoapi.analysis.IQiYiAnalyze;
 import com.oohoo.videoapi.analysis.LiveAnalyze;
+import com.oohoo.videoapi.analysis.LiveConst;
 import com.oohoo.videoapi.analysis.QQLiveAnalyze;
 import com.oohoo.videoapi.analysis.YouKuAnalyze;
 import com.oohoo.videoapi.analysis.YouTubeAnalyze;
@@ -62,11 +65,16 @@ import com.oohoo.videoapi.video.VideoUrlItem;
 import com.oohoo.widgets.MyListAdapter;
 import com.oohoo.widgets.VideoijkBean;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -92,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
         AnalysisUtils.setContext(getApplicationContext());
 
         setStatusBarTransparent();
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         initWelcomeBefore();
         initWelcome();
     }
@@ -173,6 +181,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initMainView() {
+        initLiveChannel();
         initSoundPool();
         initAnalysis();
         initView();
@@ -226,7 +235,7 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private final TextView.OnEditorActionListener onSearchTextAction = (v, actionId, event) -> {
-        if (actionId == EditorInfo.IME_ACTION_SEND) {
+        if (actionId == EditorInfo.IME_ACTION_SEARCH) {
             searchStr = v.getText().toString();
             Tools.HideKeyboard(v);
             v.clearFocus();
@@ -319,7 +328,7 @@ public class MainActivity extends AppCompatActivity {
             }else {
                 item.setIcon(R.drawable.ic_menu_share);
             }
-            if (!openPage) {
+            if (!openPage && analyze.getTitle().contains("直播")) {
                 onNavigationItemSelected.onNavigationItemSelected(item);
                 openPage = true;
             }
@@ -418,6 +427,40 @@ public class MainActivity extends AppCompatActivity {
         }catch (Exception ignored){}
     }
 
+    public void initLiveChannel() {
+        try {
+            InputStreamReader inputReader = new InputStreamReader(getAssets().open("channel.txt"));
+            BufferedReader bufReader = new BufferedReader(inputReader);
+            String line="";
+            StringBuilder result=new StringBuilder();
+            while((line = bufReader.readLine()) != null)
+                result.append(line);
+            LiveConst.Channel = result.toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            InputStreamReader inputReader = new InputStreamReader(getAssets().open("image.json"));
+            BufferedReader bufReader = new BufferedReader(inputReader);
+            String line;
+            StringBuilder result=new StringBuilder();
+            while((line = bufReader.readLine()) != null)
+                result.append(line);
+            JSONArray jsonArray = JSON.parseArray(result.toString());
+            for (int i = 0; i < jsonArray.size(); i++) {
+                Vector<String> vv = new Vector<>();
+                String text = jsonArray.getJSONObject(i).getString("name");
+                if(text == null || text.isEmpty()) continue;
+                vv.add(jsonArray.getJSONObject(i).getString("src"));
+                vv.add(text);
+                LiveConst.ImageList.add(vv);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private void playAudioTips404() {
         AudioManager am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         // 获取当前音量
@@ -449,6 +492,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void showLoading(boolean show) {
         ProgressBar loading = currentView.findViewById(R.id.video_loading);
+//        loading.setpr(R.drawable.side_status_bar);
         loading.setVisibility(show ? View.VISIBLE : View.INVISIBLE);
     }
 
@@ -472,6 +516,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }).start();
+        searchText.setFocusable(true);
+        searchText.setFocusableInTouchMode(true);
         showLoading(false);
     }
 
@@ -500,7 +546,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.setClassName("com.android.browser","com.android.browser.BrowserActivity");
             }else{
                 intent = new Intent(MainActivity.this, IJKVideoPlayActivity.class);
-                intent.putParcelableArrayListExtra("VideoUrls", (ArrayList<? extends Parcelable>) videoUrls);
+                intent.putParcelableArrayListExtra("VideoUrls", videoUrls);
                 intent.putExtra("VideoTitle", videoTitle);
                 intent.putExtra("VideoLive", isLive);
             }

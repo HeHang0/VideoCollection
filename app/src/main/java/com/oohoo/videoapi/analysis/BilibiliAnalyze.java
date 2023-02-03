@@ -155,42 +155,45 @@ public class BilibiliAnalyze extends BaseAnalyze {
         }
         if (cid.isEmpty()) return null;
         paramsBuilder.append("&cid=").append(cid);
-        paramsBuilder.append("&otype=json");
-        paramsBuilder.append("&qn=120");
-        paramsBuilder.append("&fourk=1");
-        paramsBuilder.append("&fnval=16");
 
-        String videoDetailUrl = "https://api.bilibili.com/x/player/playurl?" + paramsBuilder;
+        String videoDetailUrl = "https://api.bilibili.com/x/player/playurl?" + paramsBuilder + "&qn=120";
         anaStr = AnalysisUtils.sendDataByGet(videoDetailUrl, "Android");
         try {
             JSONObject jsonObject = JSONObject.parseObject(anaStr).getJSONObject("data");
-            JSONArray videos = jsonObject.getJSONObject("dash").getJSONArray("video");
+//            JSONArray videos = jsonObject.getJSONObject("dash").getJSONArray("video");
             Map<Integer, String> qualityMap = new HashMap<>();
             Map<Integer, String> videoMap = new HashMap<>();
+            List<Integer> qualityList = new ArrayList<>();
             JSONArray supportFormats = jsonObject.getJSONArray("support_formats");
             for (int i = 0; i < supportFormats.size(); i++){
                 try {
                     JSONObject formatObject = supportFormats.getJSONObject(i);
-                    qualityMap.put(formatObject.getInteger("quality"), formatObject.getString("new_description"));
+                    int quality = formatObject.getInteger("quality");
+                    qualityMap.put(quality, formatObject.getString("new_description"));
+                    qualityList.add(quality);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
-            for (int i = 0; i < videos.size(); i++){
+            int currentQuality = jsonObject.getIntValue("quality");
+
+            for (int i = 0; i < qualityList.size(); i++){
                 try {
-                    JSONObject videoObject = videos.getJSONObject(i);
-                    Integer qualityId = videoObject.getInteger("id");
-                    videoMap.put(qualityId, videoObject.getString("baseUrl"));
+                    if(qualityList.get(i) == currentQuality) {
+                        videoMap.put(currentQuality, jsonObject.getJSONArray("durl").getJSONObject(0).getString("url"));
+                    }else {
+                        videoDetailUrl = "https://api.bilibili.com/x/player/playurl?" + paramsBuilder + "&qn="+qualityList.get(i);
+                        anaStr = AnalysisUtils.sendDataByGet(videoDetailUrl, "Android", "SESSDATA=");
+                        videoMap.put(qualityList.get(i), JSONObject.parseObject(anaStr).getJSONObject("data").getJSONArray("durl").getJSONObject(0).getString("url"));
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
-            JSONArray acceptQualities = jsonObject.getJSONArray("accept_quality");
-            for (int i = 0; i < acceptQualities.size(); i++){
+            for (int i = 0; i < qualityList.size(); i++){
                 try {
-                    int quality = acceptQualities.getIntValue(i);
-                    if(videoMap.containsKey(quality)) {
-                        result.add(new VideoUrlItem(qualityMap.get(quality), videoMap.get(quality), headers));
+                    if(videoMap.containsKey(qualityList.get(i))) {
+                        result.add(new VideoUrlItem(qualityMap.get(qualityList.get(i)), videoMap.get(qualityList.get(i)), headers));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

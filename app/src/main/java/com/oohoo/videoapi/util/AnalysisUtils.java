@@ -131,9 +131,12 @@ public class AnalysisUtils {
         return "";
     }
 
+    public static String sendDataByGet(String path, String user_agent) {
+        return sendDataByGet(path, user_agent, "");
+    }
 
     @NonNull
-    public static String sendDataByGet(String path, String user_agent){
+    public static String sendDataByGet(String path, String user_agent, String cookies){
         HttpURLConnection conn;//声明连接对象
         InputStream is;
         StringBuilder resultData = new StringBuilder();
@@ -141,6 +144,8 @@ public class AnalysisUtils {
             URL url = new URL(path); //URL对象
             conn = (HttpURLConnection)url.openConnection(); //使用URL打开一个链接,下面设置这个连接
             conn.setRequestMethod("GET"); //使用get请求
+            if (cookies.length() > 0)
+                conn.setRequestProperty("cookie",cookies);
             if (user_agent.length() > 0)
                 conn.setRequestProperty("User-agent",user_agent);
             if(conn.getResponseCode()==200){//返回200表示连接成功

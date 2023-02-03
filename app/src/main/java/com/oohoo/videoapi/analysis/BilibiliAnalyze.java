@@ -11,7 +11,10 @@ import com.oohoo.videoapi.video.VideoUrlItem;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import static com.oohoo.videoapi.util.AnalysisUtils.VideoUrlType;
 
 /**
@@ -93,7 +96,7 @@ public class BilibiliAnalyze extends BaseAnalyze {
         }
         return list;
     }
-//
+    //
     private List<VideoUrlItem> getVideoUrlList(String retStr){
         List<VideoUrlItem> list = new ArrayList<>();
 
@@ -125,43 +128,70 @@ public class BilibiliAnalyze extends BaseAnalyze {
         return "http://app.bilibili.com/x/v2/search?" + params + "&sign=" + Tools.md5Encoder(new StringBuilder().append(params).append("560c52ccd288fed045859ed18bffd973").toString());
     }
 
-  public List<VideoUrlItem> getVideoUrl(String url){
-      List<VideoUrlItem> result = new ArrayList<>();
-        String aid;
-          if(url.contains("/video/av")) {
-              aid = Tools.getStrWithRegular("(?i)/video/av([^/^\\?]+)",url);
-          }else if(url.contains("/video/bv") || url.contains("/video/BV")) {
-              aid = Tools.getStrWithRegular("(?i)/video/bv([^/^\\?]+)",url);
-          }else if(url.contains("html")) {
-            aid = Tools.getStrWithRegular("/video/([\\S]+).html",url);
-        }else {
-            aid = Tools.getStrWithRegular("/video/([^/]+)",url);
+    public List<VideoUrlItem> getVideoUrl(String url){
+        List<VideoUrlItem> result = new ArrayList<>();
+        String aid = Tools.getStrWithRegular("(?i)/video/av([^/^\\.^\\?]+)",url);
+        String bvId = Tools.getStrWithRegular("(?i)/video/bv([^/^\\.^\\?]+)",url);
+        StringBuilder paramsBuilder = new StringBuilder();
+        if(aid.isEmpty() && bvId.isEmpty()) {
+            return null;
         }
-        String paramString1 = "aid=" + aid + "&appkey=1d8b6e7d45233436" + "&build=518000&from=6&mobi_app=android&plat=0&platform=android&ts=" + System.currentTimeMillis() / 1000L;
-        String paramString2 = new StringBuilder().append(paramString1).append("560c52ccd288fed045859ed18bffd973").toString();
-        String paramUrl = "http://app.bilibili.com/x/v2/view?" + paramString1 + "&sign=" + Tools.md5Encoder(paramString2);
-        String anaStr = AnalysisUtils.sendDataByGet(paramUrl, "Android");
+        Map<String, String> headers = new HashMap<>();
+        if(aid.isEmpty()) {
+            paramsBuilder.append("bvid=BV").append(bvId);
+            headers.put("Referer", "https://www.bilibili.com/video/BV"+bvId);
+        }else {
+            paramsBuilder.append("aid=").append(aid);
+            paramsBuilder.append("&avid=").append(aid);
+            headers.put("Referer", "https://www.bilibili.com/video/av"+aid);
+        }
+        String cidUrl = "https://api.bilibili.com/x/web-interface/view?"+paramsBuilder;
+        String anaStr = AnalysisUtils.sendDataByGet(cidUrl, "Android");
         String cid = "";
         try {
-            JSONObject jsonObject = JSONObject.parseObject(anaStr).getJSONObject("data").getJSONArray("pages").getJSONObject(0);
-            cid = jsonObject.getString("cid");
+            cid = JSONObject.parseObject(anaStr).getJSONObject("data").getString("cid");
         } catch (Exception e) {
             e.printStackTrace();
         }
         if (cid.isEmpty()) return null;
-        String paramString3 = "access_key=121c589b8dde2e22e48b5f442f75d863&appkey=iVGUTjsxvpLeuDCf" + "&build=518000&buvid=B4284733-5697-4A34-A153-2F67BA7855B41981infoc&cid=" + cid + "&avid=" + aid + "&device=android&mid=5136944&otype=json&platform=android&quality=2";
+        paramsBuilder.append("&cid=").append(cid);
+        paramsBuilder.append("&otype=json");
+        paramsBuilder.append("&qn=120");
+        paramsBuilder.append("&fourk=1");
+        paramsBuilder.append("&fnval=16");
 
-        String paramString4 = "http://api.bilibili.com/x/player/playurl?" + paramString3 + "&sign=" + Tools.md5Encoder(paramString3 + "aHRmhWMLkdeMuILqORnYZocwMBpMEOdt");
-        anaStr = AnalysisUtils.sendDataByGet(paramString4, "Android");
-        String videoUrl = "";
+        String videoDetailUrl = "https://api.bilibili.com/x/player/playurl?" + paramsBuilder;
+        anaStr = AnalysisUtils.sendDataByGet(videoDetailUrl, "Android");
         try {
             JSONObject jsonObject = JSONObject.parseObject(anaStr).getJSONObject("data");
-            videoUrl = jsonObject.getJSONArray("durl").getJSONObject(0).getString("url");
-
+            JSONArray videos = jsonObject.getJSONObject("dash").getJSONArray("video");
+            Map<Integer, String> qualityMap = new HashMap<>();
+            Map<Integer, String> videoMap = new HashMap<>();
             JSONArray supportFormats = jsonObject.getJSONArray("support_formats");
             for (int i = 0; i < supportFormats.size(); i++){
                 try {
-                    result.add(new VideoUrlItem(supportFormats.getJSONObject(i).getString("display_desc"), videoUrl));
+                    JSONObject formatObject = supportFormats.getJSONObject(i);
+                    qualityMap.put(formatObject.getInteger("quality"), formatObject.getString("new_description"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            for (int i = 0; i < videos.size(); i++){
+                try {
+                    JSONObject videoObject = videos.getJSONObject(i);
+                    Integer qualityId = videoObject.getInteger("id");
+                    videoMap.put(qualityId, videoObject.getString("baseUrl"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            JSONArray acceptQualities = jsonObject.getJSONArray("accept_quality");
+            for (int i = 0; i < acceptQualities.size(); i++){
+                try {
+                    int quality = acceptQualities.getIntValue(i);
+                    if(videoMap.containsKey(quality)) {
+                        result.add(new VideoUrlItem(qualityMap.get(quality), videoMap.get(quality), headers));
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -170,10 +200,6 @@ public class BilibiliAnalyze extends BaseAnalyze {
         } catch (Exception e) {
             e.printStackTrace();
         }
-      try {
-      } catch (Exception e) {
-          e.printStackTrace();
-      }
 
         return null;
     }

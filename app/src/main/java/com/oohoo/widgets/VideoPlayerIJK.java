@@ -312,7 +312,7 @@ public class VideoPlayerIJK extends FrameLayout implements MediaController.Media
      *                "android-allow-cross-domain-redirect" as the key and "0" or "1" as the value
      *                to disallow or allow cross domain redirection.
      */
-    private void setVideoURI(Uri uri, Map<String, String> headers) {
+    public void setVideoURI(Uri uri, Map<String, String> headers) {
         mUri = uri;
         mHeaders = headers;
         mSeekWhenPrepared = 0;
@@ -362,7 +362,6 @@ public class VideoPlayerIJK extends FrameLayout implements MediaController.Media
                 if (mUri != null) {
                     ijkMediaPlayer = new IjkMediaPlayer();
                     ijkMediaPlayer.native_setLogLevel(IjkMediaPlayer.IJK_LOG_DEBUG);
-
                     if (usingMediaCodec) {
                         ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec", 1);
                         if (usingMediaCodecAutoRotate) {
@@ -391,7 +390,7 @@ public class VideoPlayerIJK extends FrameLayout implements MediaController.Media
                     ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "http-detect-range-support", 0);
                     ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "timeout", 10000000);
                     ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "reconnect", 1);
-
+                    ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36");
                     ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_CODEC, "skip_loop_filter", 48);
                 }
                 mMediaPlayer = ijkMediaPlayer;
@@ -426,10 +425,11 @@ public class VideoPlayerIJK extends FrameLayout implements MediaController.Media
                     (TextUtils.isEmpty(scheme) || scheme.equalsIgnoreCase("file"))) {
                 IMediaDataSource dataSource = new FileMediaDataSource(new File(mUri.toString()));
                 mMediaPlayer.setDataSource(dataSource);
-            } else if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-                mMediaPlayer.setDataSource(mAppContext, mUri, mHeaders);
+//            } else if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+//                mMediaPlayer.setDataSource(mAppContext, mUri, mHeaders);
             } else {
-                mMediaPlayer.setDataSource(mUri.toString());
+//                mMediaPlayer.setDataSource(mUri.toString());
+                mMediaPlayer.setDataSource(mAppContext, mUri, mHeaders);
             }
             bindSurfaceHolder(mMediaPlayer, mSurfaceHolder);
             mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);

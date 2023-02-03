@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.media.AudioManager;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -36,6 +37,7 @@ import com.oohoo.videocollection.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import tv.danmaku.ijk.media.player.IMediaPlayer;
 import tv.danmaku.ijk.media.player.IjkMediaPlayer;
@@ -219,6 +221,10 @@ public class PlayerView {
      * 当前播放地址
      */
     private String currentUrl;
+    /**
+     * 当前Header
+     */
+    private Map<String, String> currentHeaders;
     /**
      * 当前选择的视频流索引
      */
@@ -1041,13 +1047,13 @@ de
      */
     public PlayerView startPlay() {
         if (isLive) {
-            videoView.setVideoPath(currentUrl);
+            videoView.setVideoURI(Uri.parse(currentUrl), currentHeaders);
             videoView.seekTo(0);
         } else {
             if (isHasSwitchStream || status == PlayStateParams.STATE_ERROR) {
                 //换源之后声音可播，画面卡住，主要是渲染问题，目前只是提供了软解方式，后期提供设置方式
                 videoView.setRender(renderType);
-                videoView.setVideoPath(currentUrl);
+                videoView.setVideoURI(Uri.parse(currentUrl), currentHeaders);
                 videoView.seekTo(currentPosition);
                 isHasSwitchStream = false;
             }
@@ -1082,6 +1088,7 @@ de
         if (listVideos.size() > index) {
             tv_steam.setText(listVideos.get(index).getStream());
             currentUrl = listVideos.get(index).getUrl();
+            currentHeaders =  listVideos.get(index).getHeaders();
             listVideos.get(index).setSelect(true);
             if (videoView.isPlaying()) {
                 getCurrentPosition();

@@ -227,7 +227,8 @@ public class MainActivity extends AppCompatActivity {
                 for (int i = 0; i < urlList.size(); i ++) {
                     vList.add(new VideoijkBean(i,
                             urlList.get(i).getDescription(),
-                            urlList.get(i).getUrl()));
+                            urlList.get(i).getUrl(),
+                            urlList.get(i).getHeaders()));
                 }
                 runOnUiThread(() -> openVideo(vList, netVideo.getTitle(), analyzeSelected.getLive()));
             }

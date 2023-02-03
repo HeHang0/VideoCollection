@@ -3,6 +3,9 @@ package com.oohoo.widgets;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by HeHang on 2018/1/28.
  */
@@ -28,6 +31,10 @@ public class VideoijkBean implements Parcelable {
      * 当前选中的
      */
     boolean select;
+    /**
+     * 附加的header
+     */
+    Map<String, String> headers;
 
     public VideoijkBean() {
 
@@ -37,6 +44,13 @@ public class VideoijkBean implements Parcelable {
         this.id = id;
         this.stream = stream;
         this.url = url;
+    }
+
+    public VideoijkBean(int id, String stream, String url, Map<String, String> headers) {
+        this.id = id;
+        this.stream = stream;
+        this.url = url;
+        this.headers = headers;
     }
 
     public VideoijkBean(int id, String stream, String url, boolean select) {
@@ -52,6 +66,9 @@ public class VideoijkBean implements Parcelable {
         url = in.readString();
         remarks = in.readString();
         select = in.readByte() != 0;
+        headers = new HashMap<>();
+        in.readMap(headers, getClass().getClassLoader());
+        if(headers.size() == 0) headers = null;
     }
 
     public static final Creator<VideoijkBean> CREATOR = new Creator<VideoijkBean>() {
@@ -106,6 +123,14 @@ public class VideoijkBean implements Parcelable {
         this.select = select;
     }
 
+    public Map<String, String> getHeaders() {
+        return headers;
+    }
+
+    public void setHeaders(Map<String, String> headers) {
+        this.headers = headers;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -142,5 +167,10 @@ public class VideoijkBean implements Parcelable {
         dest.writeString(url);
         dest.writeString(remarks);
         dest.writeByte((byte) (select ? 1 : 0));
+        if(headers == null) {
+            dest.writeMap(new HashMap<String, String>());
+        }else {
+            dest.writeMap(headers);
+        }
     }
 }

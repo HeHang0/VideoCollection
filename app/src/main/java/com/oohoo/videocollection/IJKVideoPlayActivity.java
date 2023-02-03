@@ -66,6 +66,7 @@ public class IJKVideoPlayActivity extends Activity {
                         .into(ivThumbnail))
                 .setPlaySource(pathList)
                 .setPlayerBackListener(this::playerBack).startPlay();
+
         if(savedInstanceState == null) return;
         int currentPosition = savedInstanceState.getInt("currentPosition");
         if(currentPosition > 0) {

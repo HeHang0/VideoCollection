@@ -328,7 +328,7 @@ public class MainActivity extends AppCompatActivity {
             }else {
                 item.setIcon(R.drawable.ic_menu_share);
             }
-            if (!openPage && analyze.getTitle().contains("直播")) {
+            if (!openPage && analyze.getTitle().contains("哔哩哔哩")) {
                 onNavigationItemSelected.onNavigationItemSelected(item);
                 openPage = true;
             }

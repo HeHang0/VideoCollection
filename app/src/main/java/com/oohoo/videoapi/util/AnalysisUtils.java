@@ -226,6 +226,7 @@ public class AnalysisUtils {
     }
 
     public static Bitmap getImageThumbnailRemote(String imagePath, int width, int height) {
+        System.out.println("加载图片：" + imagePath+width+height);
         String name = string2MD5(imagePath)+width+height;
         Bitmap bitmap = getBitmapFromTmp(name);
         if(bitmap != null) return bitmap;

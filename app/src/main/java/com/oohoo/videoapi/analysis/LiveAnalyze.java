@@ -59,6 +59,8 @@ public class LiveAnalyze extends BaseAnalyze {
                 }
             }
             return result;
+        }else if(allVideos != null) {
+            return allVideos;
         }
         return null;
     }
@@ -101,34 +103,12 @@ public class LiveAnalyze extends BaseAnalyze {
             List<VideoUrlItem> streams = streamMap.get(nameKey);
             if(streams == null || streams.size() <= 0) continue;
             String imgUrl = findImage(nameKey);
-            if(imgUrl == null)imgUrl = "";
-            if(imgUrl.isEmpty() && nameKey.contains("CCTV")) {
-                for (int i = 17; i > 0; i--) {
-                    if(i == 5 && (nameKey.contains("CCTV-"+i+"+") || nameKey.contains("CCTV"+i+"Plus"))) {
-                        imgUrl = "https://p1.img.cctvpic.com/photoAlbum/templet/common/DEPA1546583592748817/cctv5plus.png";
-                    }else if(nameKey.contains("CCTV-"+i) || nameKey.contains("CCTV"+i)) {
-                        imgUrl = "https://p1.img.cctvpic.com/photoAlbum/templet/common/DEPA1546583592748817/cctv" + i + ".png";
-                        break;
-                    }
-                }
-                if(imgUrl.isEmpty()) {
-                    imgUrl = "https://p1.img.cctvpic.com/photoAlbum/templet/common/DEPA1652643499621200/mapLogo.png";
-                }
+            if(imgUrl == null || imgUrl.isEmpty()){
+                imgUrl = findImage(nameKey.substring(0, 2));
             }
+            if(imgUrl == null)imgUrl = "";
             NetVideo nv = new NetVideo(nameKey, "", imgUrl, streams, nameKey.substring(0, 1));
             list.add(nv);
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            list.sort(Comparator.comparing(NetVideo::getTitle));
-        }
-        if(list.isEmpty()){
-            list.add(new NetVideo("CCTV1","高清","http://download.easyicon.net/png/518254/77/","http://ivi.bupt.edu.cn/hls/cctv1hd.m3u8","1"));
-            list.add(new NetVideo("CCTV3","高清","http://download.easyicon.net/png/518256/77/","http://ivi.bupt.edu.cn/hls/cctv3hd.m3u8","2"));
-            list.add(new NetVideo("CCTV5","高清","http://download.easyicon.net/png/518258/77/","http://ivi.bupt.edu.cn/hls/cctv5hd.m3u8","3"));
-            list.add(new NetVideo("CCTV5+","高清","http://download.easyicon.net/png/518258/77/","http://ivi.bupt.edu.cn/hls/cctv5phd.m3u8","4"));
-            list.add(new NetVideo("CCTV6","高清","http://download.easyicon.net/png/518259/77/","http://ivi.bupt.edu.cn/hls/cctv6hd.m3u8","5"));
-            list.add(new NetVideo("CCTV9","标清","http://download.easyicon.net/png/518259/77/","http://223.82.250.72/ysten-business/live/cctv-news/1.m3u8","6"));
-            list.add(new NetVideo("香港卫视","高清","http://www.hkstv.tv/templates/site_shared/assets/img/blogo.png","http://live.hkstv.hk.lxdns.com/live/hks/playlist.m3u8","6"));
         }
         return list;
     }

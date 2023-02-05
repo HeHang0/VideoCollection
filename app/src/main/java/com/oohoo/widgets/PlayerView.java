@@ -73,6 +73,10 @@ public class PlayerView {
      */
     private final int statusBarHeight;
     /**
+     * 导航栏高度
+     */
+    private final int navigationBarHeight;
+    /**
      * 播放器顶部控制bar
      */
     private final LinearLayout ll_topbar;
@@ -606,6 +610,8 @@ public class PlayerView {
         Resources resources = activity.getResources();
         int resourceId = resources.getIdentifier("status_bar_height", "dimen", "android");
         statusBarHeight = resources.getDimensionPixelSize(resourceId);
+        resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android");
+        navigationBarHeight = resources.getDimensionPixelSize(resourceId);
         screenWidthPixels = mContext.getResources().getDisplayMetrics().widthPixels;
         audioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
         mMaxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
@@ -1465,18 +1471,24 @@ de
     public PlayerView toggleFullScreen() {
         RelativeLayout.LayoutParams layoutParams
            =new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-
         if (getScreenOrientation() == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
             mActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             layoutParams.topMargin = statusBarHeight;
-            ll_topbar.setLayoutParams(layoutParams);
         } else {
             mActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
             layoutParams.topMargin = 0;
-            ll_topbar.setLayoutParams(layoutParams);
         }
+        ll_topbar.setLayoutParams(layoutParams);
         updateFullScreenButton();
         return this;
+    }
+
+    /**
+     * 判断全屏切换
+     */
+    public boolean isFullScreen() {
+        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) ll_topbar.getLayoutParams();
+        return layoutParams.topMargin == 0;
     }
 
     /**

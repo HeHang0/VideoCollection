@@ -38,7 +38,9 @@ public class IJKVideoPlayActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        WindowManager.LayoutParams params = getWindow().getAttributes();
+        params.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|View.SYSTEM_UI_FLAG_IMMERSIVE;
+        getWindow().setAttributes(params);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -131,7 +133,7 @@ public class IJKVideoPlayActivity extends Activity {
         }
     };
     public void exit() {
-        if (!isExit) {
+        if (!isExit && !isTablet(this)) {
             isExit = true;
             Toast.makeText(getApplicationContext(), "再按一次退出播放",
                     Toast.LENGTH_SHORT).show();
@@ -144,8 +146,13 @@ public class IJKVideoPlayActivity extends Activity {
         }
     }
 
+    public static boolean isTablet(Context context) {
+        return (context.getResources().getConfiguration().screenLayout &
+                Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE;
+    }
+
     public void playerBack() {
-        if(player.getScreenOrientation() == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+        if(player.getScreenOrientation() == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE && !isTablet(this)) {
             player.toggleFullScreen();
         }else {
             exit();

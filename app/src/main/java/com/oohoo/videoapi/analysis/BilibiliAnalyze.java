@@ -183,7 +183,7 @@ public class BilibiliAnalyze extends BaseAnalyze {
                         videoMap.put(currentQuality, jsonObject.getJSONArray("durl").getJSONObject(0).getString("url"));
                     }else {
                         videoDetailUrl = "https://api.bilibili.com/x/player/playurl?" + paramsBuilder + "&qn="+qualityList.get(i);
-                        anaStr = AnalysisUtils.sendDataByGet(videoDetailUrl, "Android", "SESSDATA=");
+                        anaStr = AnalysisUtils.sendDataByGet(videoDetailUrl, "Android", "SESSDATA=3623546e%2C1691000438%2C16db6%2A21");
                         videoMap.put(qualityList.get(i), JSONObject.parseObject(anaStr).getJSONObject("data").getJSONArray("durl").getJSONObject(0).getString("url"));
                     }
                 } catch (JSONException e) {

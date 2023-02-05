@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.Insets;
@@ -81,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
 
     private final List<NetVideo> netVideoList = new ArrayList<>();
     private final Map<String, BaseAnalyze> analyzeMap = new HashMap<>();
+    private final List<String> analyzeList = new ArrayList<>();
+    private SharedPreferences localSP;
     private Toolbar toolbar;
     private View currentView;
     private TextView searchText;
@@ -98,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         AnalysisUtils.setContext(getApplicationContext());
-
+        localSP = getSharedPreferences("video_collection_config_info", Context.MODE_PRIVATE);
         setStatusBarTransparent();
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         initWelcomeBefore();
@@ -258,20 +261,28 @@ public class MainActivity extends AppCompatActivity {
     private void initAnalysis() {
         BaseAnalyze analyze = new LiveAnalyze().setIconId(R.drawable.ic_menu_live);
         analyzeMap.put(analyze.getTitle(), analyze);
+        analyzeList.add(analyze.getTitle());
         analyze = new CloudMusicAnalyze().setIconId(R.drawable.ic_menu_cloudmusic);
         analyzeMap.put(analyze.getTitle(), analyze);
+        analyzeList.add(analyze.getTitle());
         analyze = new DouBanTop250Analyze().setIconId(R.drawable.ic_menu_douban);
         analyzeMap.put(analyze.getTitle(), analyze);
+        analyzeList.add(analyze.getTitle());
         analyze = new BilibiliAnalyze().setIconId(R.drawable.ic_menu_bilibili);
         analyzeMap.put(analyze.getTitle(), analyze);
+        analyzeList.add(analyze.getTitle());
         analyze = new QQLiveAnalyze().setIconId(R.drawable.ic_menu_qqlive);
         analyzeMap.put(analyze.getTitle(), analyze);
+        analyzeList.add(analyze.getTitle());
         analyze = new IQiYiAnalyze().setIconId(R.drawable.ic_menu_iqiyi);
         analyzeMap.put(analyze.getTitle(), analyze);
+        analyzeList.add(analyze.getTitle());
         analyze = new YouKuAnalyze().setIconId(R.drawable.ic_menu_youku);
         analyzeMap.put(analyze.getTitle(), analyze);
+        analyzeList.add(analyze.getTitle());
         analyze = new YouTubeAnalyze().setIconId(R.drawable.ic_menu_youtube);
         analyzeMap.put(analyze.getTitle(), analyze);
+        analyzeList.add(analyze.getTitle());
     }
 
     private void setStatusBarTransparent() {
@@ -287,9 +298,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private NavigationView.OnNavigationItemSelectedListener onNavigationItemSelected =
+    private final NavigationView.OnNavigationItemSelectedListener onNavigationItemSelected =
             item -> {
                 String title = item.getTitle().toString();
+                localSP.edit().putString("nav_title",title).commit();
                 analyzeSelected = analyzeMap.get(title);
                 if(analyzeSelected == null) return false;
                 toolbar.setTitle(analyzeSelected.getTitle());
@@ -320,8 +332,9 @@ public class MainActivity extends AppCompatActivity {
         final int MENU_MAIN_GROUP_ID = 12326;
         final int MENU_ABOUT_GROUP_ID = 12327;
         boolean openPage = false;
-        for(BaseAnalyze analyze : analyzeMap.values()){
-            MenuItem item = menu.add(MENU_MAIN_GROUP_ID, i++, i, analyze.getTitle());
+        for(String analyzeKey : analyzeList){
+            MenuItem item = menu.add(MENU_MAIN_GROUP_ID, i++, i, analyzeKey);
+            BaseAnalyze analyze = analyzeMap.get(analyzeKey);
             if(analyze.getIconId() != -1){
                 item.setIcon(analyze.getIconId());
             }else if(analyze.getIcon() != null) {
@@ -329,7 +342,8 @@ public class MainActivity extends AppCompatActivity {
             }else {
                 item.setIcon(R.drawable.ic_menu_share);
             }
-            if (!openPage && analyze.getTitle().contains("哔哩哔哩")) {
+            String localTitle = localSP.getString("nav_title","直播");
+            if (!openPage && analyze.getTitle().contains(localTitle)) {
                 onNavigationItemSelected.onNavigationItemSelected(item);
                 openPage = true;
             }

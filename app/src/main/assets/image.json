@@ -132,6 +132,10 @@
     "src": "https://p1.img.cctvpic.com/photoAlbum/templet/common/DEPA1546583592748817/cctv15.png"
   },
   {
+    "name": "CCTV16",
+    "src": "https://p1.img.cctvpic.com/photoAlbum/templet/common/DEPA1546583592748817/cctv16.png"
+  },
+  {
     "name": "CCTV17",
     "src": "https://p1.img.cctvpic.com/photoAlbum/templet/common/DEPA1546583592748817/cctv17.png"
   },
@@ -2944,10 +2948,6 @@
     "src": "http://epg.51zmt.top:8000/tb1/qt/中国教育4台.png"
   },
   {
-    "name": "CCTV16",
-    "src": "http://epg.51zmt.top:8000/tb1/CCTV/CCTV16.png"
-  },
-  {
     "name": "CCTV奥林匹克频道",
     "src": "http://epg.51zmt.top:8000/tb1/CCTV/CCTV16.png"
   },
@@ -3107,18 +3107,6 @@
     "name": "CCTV-4 Europe",
     "text": "CCTV-4 Europe",
     "src": "https://i.imgur.com/HGLFdfk.png",
-    "url": "https://tv.cctv.com"
-  },
-  {
-    "name": "CCTV-4 Asia",
-    "text": "CCTV-4 Asia",
-    "src": "http://www.16899168.com/dianshitai/zbbimg/cctv4.jpg",
-    "url": "https://tv.cctv.com"
-  },
-  {
-    "name": "CCTV-4",
-    "text": "CCTV-4 Asia",
-    "src": "http://www.16899168.com/dianshitai/zbbimg/cctv4.jpg",
     "url": "https://tv.cctv.com"
   },
   {
@@ -3564,5 +3552,9 @@
     "text": "Zhejiang Satellite TV",
     "src": "https://i.imgur.com/5gQn4uY.png",
     "url": "https://tv.cctv.com"
+  },
+  {
+    "name": "CCTV-4K",
+    "src": "https://pix1.tvzhe.com/images/logo/channel/CCTV4K/CCTV4K.jpg"
   }
 ]

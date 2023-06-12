@@ -38,7 +38,11 @@ public class LiveAnalyze extends BaseAnalyze {
 
     private final String STREAM_URL_CCTV = "https://raw.fastgit.org/iptv-org/iptv/master/streams/cn_cctv.m3u";
 
+    private final String STREAM_URL_FEI_YANG = "https://raw.fastgit.org/youshandefeiyang/IPTV-URL/main/";
+
     private final String Channel_URL = "https://iptv-org.github.io/api/channels.json";
+
+    private final String[] STREAM_FEI_YANG_ITEMS = new String[]{"bestv.m3u", "IPTV.m3u"};
 
     private List<NetVideo> allVideos = null;
 
@@ -67,9 +71,12 @@ public class LiveAnalyze extends BaseAnalyze {
 
     @Override
     public List<NetVideo> getVideoListByHome(){
-        List<NetVideo> result = getVideoListStreamUrl(STREAM_URL_CCTV);
+        List<NetVideo> result = new ArrayList<>();
+        for (String item: STREAM_FEI_YANG_ITEMS) {
+            result.addAll(getVideoListStreamUrl(STREAM_URL_FEI_YANG + item));
+        }
 //        Collections.sort(result);
-        result.addAll(getVideoListStreamUrl(STREAM_URL));
+//        result.addAll(getVideoListStreamUrl(STREAM_URL));
         allVideos = result;
         return result;
     }
@@ -80,14 +87,26 @@ public class LiveAnalyze extends BaseAnalyze {
         Log.i(TAG, "获取到了stream");
         String[] m3UList = retStr.split("\n");
         String name = "";
+        String tagLogo = "";
         List<NetVideo> list =  new ArrayList<>();
         Map<String, List<VideoUrlItem>> streamMap = new HashMap<>();
         List<String> keyList = new ArrayList<>();
         for (String line : m3UList) {
-            if (line.contains(" status=\"online\"")) {
-                name = Tools.getStrWithRegular("status=\"online\",([\\S\\s]+)", line);
-            } else if (!line.startsWith("http")) {
+            if(line.contains("[") && line.contains("]")) {
                 name = "";
+                continue;
+            }
+            if(line.contains("#EXTINF")) {
+                name = "";
+                tagLogo = "";
+                String[] filed = line.split(",");
+                if(filed.length > 0){
+                    name = filed[filed.length - 1].split(" ")[0];
+                    tagLogo = Tools.getStrWithRegular("tvg\\-logo=\"([\\S]+)\"", line);
+                }
+//            }
+//            if (line.contains(" status=\"online\"")) {
+//                name = Tools.getStrWithRegular("status=\"online\",([\\S\\s]+)", line);
             }
             if (!name.isEmpty() && line.startsWith("http")) {
                 String nameKey = Tools.getStrWithRegular("([^\\(^\\(]+)", name);
@@ -106,7 +125,7 @@ public class LiveAnalyze extends BaseAnalyze {
             if(imgUrl == null || imgUrl.isEmpty()){
                 imgUrl = findImage(nameKey.substring(0, 2));
             }
-            if(imgUrl == null)imgUrl = "";
+            if(imgUrl == null)imgUrl = tagLogo;
             NetVideo nv = new NetVideo(nameKey, "", imgUrl, streams, nameKey.substring(0, 1));
             list.add(nv);
         }
@@ -114,7 +133,7 @@ public class LiveAnalyze extends BaseAnalyze {
     }
 
     private String findImage(String name) {
-        for (int i = 0; i < LiveConst.ImageList.size(); i++) {
+        for (int i = LiveConst.ImageList.size() - 1; i >= 0; i--) {
             if(name.contains(LiveConst.ImageList.get(i).get(1))) {
                 return LiveConst.ImageList.get(i).get(0);
             }
